@@ -54,7 +54,7 @@ namespace CentroMedico.Data
                     Especialidad = Especialidad.Pediatria
                 },
                 new Medico{
-                    DNI = "55555555",
+                    DNI = "99999999",
                     Nombre = "Dr. Esteban Dido",
                     Especialidad = Especialidad.Traumatologia
                 }

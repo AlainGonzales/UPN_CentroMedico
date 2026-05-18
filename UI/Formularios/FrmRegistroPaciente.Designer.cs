@@ -48,7 +48,7 @@
             // label1
             // 
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(170, 9);
             label1.Name = "label1";
             label1.Size = new Size(100, 23);
             label1.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             // label2
             // 
-            label2.Location = new Point(12, 38);
+            label2.Location = new Point(170, 38);
             label2.Name = "label2";
             label2.Size = new Size(100, 23);
             label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             // label3
             // 
-            label3.Location = new Point(12, 67);
+            label3.Location = new Point(170, 67);
             label3.Name = "label3";
             label3.Size = new Size(100, 23);
             label3.TabIndex = 2;
@@ -75,7 +75,7 @@
             // 
             // label4
             // 
-            label4.Location = new Point(12, 96);
+            label4.Location = new Point(170, 96);
             label4.Name = "label4";
             label4.Size = new Size(100, 23);
             label4.TabIndex = 3;
@@ -84,7 +84,7 @@
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Location = new Point(118, 183);
+            btnRegistrar.Location = new Point(276, 183);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(394, 40);
             btnRegistrar.TabIndex = 4;
@@ -94,28 +94,28 @@
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(118, 9);
+            txtDNI.Location = new Point(276, 9);
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(117, 23);
             txtDNI.TabIndex = 5;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(118, 38);
+            txtNombre.Location = new Point(276, 38);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(394, 23);
             txtNombre.TabIndex = 6;
             // 
             // txtEdad
             // 
-            txtEdad.Location = new Point(118, 67);
+            txtEdad.Location = new Point(276, 67);
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(117, 23);
             txtEdad.TabIndex = 7;
             // 
             // txtSintomas
             // 
-            txtSintomas.Location = new Point(118, 96);
+            txtSintomas.Location = new Point(276, 96);
             txtSintomas.Multiline = true;
             txtSintomas.Name = "txtSintomas";
             txtSintomas.Size = new Size(394, 81);
@@ -124,9 +124,9 @@
             // lvRegistrados
             // 
             lvRegistrados.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
-            lvRegistrados.Location = new Point(12, 305);
+            lvRegistrados.Location = new Point(170, 305);
             lvRegistrados.Name = "lvRegistrados";
-            lvRegistrados.Size = new Size(500, 200);
+            lvRegistrados.Size = new Size(581, 200);
             lvRegistrados.TabIndex = 9;
             lvRegistrados.UseCompatibleStateImageBehavior = false;
             lvRegistrados.View = View.Details;
@@ -134,7 +134,7 @@
             // columnHeader1
             // 
             columnHeader1.Text = "DNI";
-            columnHeader1.Width = 50;
+            columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
@@ -153,7 +153,7 @@
             // 
             // lblEstado
             // 
-            lblEstado.Location = new Point(12, 279);
+            lblEstado.Location = new Point(170, 279);
             lblEstado.Name = "lblEstado";
             lblEstado.Size = new Size(377, 23);
             lblEstado.TabIndex = 10;
@@ -164,7 +164,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(524, 517);
+            ClientSize = new Size(790, 629);
             Controls.Add(lblEstado);
             Controls.Add(lvRegistrados);
             Controls.Add(txtSintomas);
@@ -176,7 +176,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormStyle = FormStyles.StatusAndActionBar_None;
             Name = "frmRegistroPaciente";
+            Padding = new Padding(3, 0, 3, 3);
+            ShowInTaskbar = false;
             Text = "Registro de Paciente (Lista Simple y Encola)";
             Load += frmRegistroPaciente_Load;
             ResumeLayout(false);

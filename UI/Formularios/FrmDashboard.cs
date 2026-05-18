@@ -36,7 +36,7 @@ namespace CentroMedico
             medicosEnTurno = new ListaCircularMedicos();
             pilaAcciones = new PilaAcciones();
 
-            // Opcional: precarga tus médicos en la lista circular
+            // Opcional: precarga tus mï¿½dicos en la lista circular
             //medicosEnTurno.Agregar(new Medico("11111111", "Dr. Gregory House"));
             PrecargarMedicos();
             AgregarTurnosMedicos();
@@ -70,9 +70,9 @@ namespace CentroMedico
         private void PrecargarPacientes()
         {
             Paciente p1 = new Paciente("12345678", "Ana Torres", "28", "Dolor de cabeza");
-            Paciente p2 = new Paciente("87654321", "Luis Chávez", "34", "Fiebre y escalofríos");
-            Paciente p3 = new Paciente("11223344", "María Paredes", "45", "Dolor abdominal");
-            Paciente p4 = new Paciente("44332211", "Carlos Vela", "60", "Presión alta");
+            Paciente p2 = new Paciente("87654321", "Luis Chï¿½vez", "34", "Fiebre y escalofrï¿½os");
+            Paciente p3 = new Paciente("11223344", "Marï¿½a Paredes", "45", "Dolor abdominal");
+            Paciente p4 = new Paciente("44332211", "Carlos Vela", "60", "Presiï¿½n alta");
 
             // Lista simple
             pacientesRegistrados.AgregarAlFinal(p1);
@@ -80,7 +80,7 @@ namespace CentroMedico
             pacientesRegistrados.AgregarAlFinal(p3);
             pacientesRegistrados.AgregarAlFinal(p4);
 
-            // Cola de atención
+            // Cola de atenciï¿½n
             colaEspera.Encolar(p1);
             colaEspera.Encolar(p2);
             colaEspera.Encolar(p3);
@@ -93,13 +93,13 @@ namespace CentroMedico
 
         private void RefrescarDashboard()
         {
-            lblDoctorTurno.Text = $"Médico en turno: {medicosEnTurno.ObtenerActual().Nombre}";
+            lblDoctorTurno.Text = $"MÃ©dico en turno: {medicosEnTurno.ObtenerActual().Nombre}";
 
             lblPacientesEnCola.Text = $"Pacientes en cola: {colaEspera.Contar()}";
 
             lblUltimaAccion.Text = pilaAcciones.EstaVacia()
-                ? "Última acción: —"
-                : $"Última acción: {pilaAcciones.Tope()}";
+                ? "Ãšltima acciÃ³n: "
+                : $"Ãšltima acciÃ³n: {pilaAcciones.Tope()}";
 
             lvColaPacientes.Items.Clear();
             foreach (Paciente p in colaEspera.ObtenerTodos())
@@ -111,7 +111,7 @@ namespace CentroMedico
 
         private void btnRegistrarPaciente_Click(object sender, EventArgs e)
         {
-            frmRegistroPaciente form = new frmRegistroPaciente(pacientesRegistrados, colaEspera, pilaAcciones);
+            frmRegistroPaciente form = new frmRegistroPaciente(pacientesRegistrados, colaEspera, pilaAcciones, RefrescarDashboard);
             form.ShowDialog();
             RefrescarDashboard();
         }

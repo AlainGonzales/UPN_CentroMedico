@@ -1,60 +1,33 @@
 ﻿using CentroMedico.Dominio;
 using CentroMedico.Infraestructura.Estructuras;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using MaterialSkin.Controls;
 
 namespace CentroMedico
 {
-    public partial class frmRegistroPaciente : Form
+    public partial class frmRegistroPaciente : MaterialForm
     {
         private ListaSimplePaciente listaPacientes;
         private ColaPacientes cola;
         private PilaAcciones pila;
 
-        private bool datosPrecargados = false;
+        // Almacena la función que actualizará los indicadores del Dashboard
+        private Action actualizarDashboard;
 
         public frmRegistroPaciente()
         {
             InitializeComponent();
         }
 
-        public frmRegistroPaciente(ListaSimplePaciente lista, ColaPacientes cola, PilaAcciones pila)
+        public frmRegistroPaciente(ListaSimplePaciente lista, ColaPacientes cola, PilaAcciones pila, Action alRegistrar)
         {
             InitializeComponent();
             this.listaPacientes = lista;
             this.cola = cola;
             this.pila = pila;
+            this.actualizarDashboard = alRegistrar; // Guardamos la referencia de la acción
             this.Load += frmRegistroPaciente_Load;
 
-            //if (!datosPrecargados)
-            //{
-
-            //    Paciente p1 = new Paciente("12345678", "Ana Torres", "30", "Dolor de cabeza");
-            //    Paciente p2 = new Paciente("87654321", "Luis Chávez", "45", "Dolor abdominal");
-            //    Paciente p3 = new Paciente("11223344", "María Paredes", "25", "Fiebre alta");
-            //    Paciente p4 = new Paciente("44332211", "Carlos Vela", "60", "Dolor en el pecho");
-
-            //    listaPacientes.AgregarAlFinal(p1);
-            //    listaPacientes.AgregarAlFinal(p2);
-            //    listaPacientes.AgregarAlFinal(p3);
-            //    listaPacientes.AgregarAlFinal(p4);
-
-            //    cola.Encolar(p1);
-            //    cola.Encolar(p2);
-            //    cola.Encolar(p3);
-            //    cola.Encolar(p4);
-
-            //    pila.Apilar(new AccionRealizada("Precarga", "4 pacientes precargados"));
-
-            //    datosPrecargados = true;
-            //}
+ 
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -86,7 +59,20 @@ namespace CentroMedico
             pila.Apilar(new AccionRealizada("Registro", $"Paciente {nuevo.Nombre} registrado y encolado."));
 
             MessageBox.Show("Paciente registrado con éxito.");
-            this.Close(); 
+
+            // === AJUSTES PARA OPERAR DENTRO DEL TABCONTROL ===
+
+            // 1. Ejecuta de forma segura el refresco del Dashboard principal
+            actualizarDashboard?.Invoke();
+
+            // 2. Limpia los TextBox para que quede listo para el siguiente paciente
+            txtDNI.Clear();
+            txtNombre.Clear();
+            txtEdad.Clear();
+            txtSintomas.Clear();
+
+            // 3. Actualiza el ListView que está abajo en esta misma pantalla de registro
+            MostrarPacientesRegistrados();
         }
 
         private void MostrarPacientesRegistrados()

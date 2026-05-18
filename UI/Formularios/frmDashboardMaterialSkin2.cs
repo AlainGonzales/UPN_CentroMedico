@@ -1,6 +1,7 @@
 ﻿using CentroMedico.Dominio;
 using CentroMedico.Infraestructura.Estructuras;
 using CentroMedico.Services;
+using MaterialSkin;
 using MaterialSkin.Controls;
 
 namespace CentroMedico.UI.Formularios
@@ -18,17 +19,13 @@ namespace CentroMedico.UI.Formularios
 
         public frmDashboardMaterialSkin2()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             pacientesRegistrados = new ListaSimplePaciente();
             colaEspera = new ColaPacientes();
             historialAtenciones = new ListaDobleHistorial();
             medicosEnTurno = new ListaCircularMedicos();
             pilaAcciones = new PilaAcciones();
-
-            //medicosEnTurno.Agregar(new Medico("11111111", "Dr. Gregory House", ""));
-            //medicosEnTurno.Agregar(new Medico("22222222", "Dra. Lastimosa Curita",""));
-            //medicosEnTurno.Agregar(new Medico("33333333", "Dr. Juanete Grande",""));
 
             PrecargarMedicos();
             AgregarTurnosMedicos();
@@ -40,6 +37,9 @@ namespace CentroMedico.UI.Formularios
             }
 
             RefrescarDashboardMaterialSkin();
+
+            // LLAMAR AQUÍ AL MÉTODO PARA CARGAR EL FORMULARIO
+            CargarFormularioRegistro();
         }
 
         public void PrecargarMedicos()
@@ -74,6 +74,31 @@ namespace CentroMedico.UI.Formularios
             colaEspera.Encolar(p4);
 
             pilaAcciones.Apilar(new AccionRealizada("Precarga", "Se registraron 4 pacientes por defecto"));
+        }
+
+        private void CargarFormularioRegistro()
+        {
+            // 1. Instanciamos el formulario pasando las colecciones del Dashboard 
+            // y una acción (Lambda) para que refresque el Dashboard al registrar un paciente
+            frmRegistroPaciente frmRegistro = new frmRegistroPaciente(
+                pacientesRegistrados,
+                colaEspera,
+                pilaAcciones,
+                () => RefrescarDashboardMaterialSkin()
+            );
+
+            // 2. Lo configuramos como un control hijo (sin bordes ni barra superior)
+            frmRegistro.TopLevel = false;
+            frmRegistro.FormBorderStyle = FormBorderStyle.None;
+            frmRegistro.FormStyle = MaterialForm.FormStyles.StatusAndActionBar_None; // Quita la barra azul de MaterialSkin
+            frmRegistro.Dock = DockStyle.Fill;
+
+            // 3. Lo agregamos a los controles de la segunda pestaña
+            // NOTA: Reemplaza 'materialTabControl1.TabPages[1]' por el nombre o índice real de tu TabControl
+            tabControlDashboard.TabPages[1].Controls.Add(frmRegistro);
+
+            // 4. Lo mostramos
+            frmRegistro.Show();
         }
 
         private void RefrescarDashboardMaterialSkin()
